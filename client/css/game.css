@@ -1,0 +1,59 @@
+.bomber-map div {
+    width: 32px;
+    height: 32px;
+    float: left;
+    background-image: url('../tilesets/snes.png');
+    background-repeat: no-repeat;
+}
+
+
+body {
+    font-family: 'Terminal Dosis Light', Georgia, arial, serif;
+    font-size: 25px;
+    margin: 20px 0 0 0;
+}
+h1 {
+    color: #27CC79;
+    margin: 0;
+}
+abbr {
+    border-bottom: 1px dotted black;
+}
+#wrapper {
+    width: 800px;
+    margin: 0px auto;
+    text-align: left;
+}
+#description {
+    width: 256px;
+    float: left;
+}
+#game {
+    float: left;
+    width: 480px;
+    margin-left: 64px;
+}
+p {
+    text-align: justify;
+    margin: 20px 0;
+}
+ul {
+    margin: 0 0;
+    font-size: 20px;
+}
+ul li {
+    list-style-type: none;
+}
+ul li:before {
+    content: '>';
+    margin-left: -25px;
+    padding-right: 10px;
+}
+
+a, a:active, a:visited {
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
