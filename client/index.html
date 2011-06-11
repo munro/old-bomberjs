@@ -4,47 +4,51 @@
 <html>
   <head>
     <title>BomberJS</title>
-    <link rel="stylesheet" href="css/game.css" />
-    <link href="webfonts/Terminal_Dosis_Light.css" rel="stylesheet" />
-    <script data-main="bomber" src="require.js"></script>
-    <!--
-    <script src="../libs/require.js"></script>
-    <script src="bomber.min.js"></script>
-    -->
+    <link rel="stylesheet" href="media/css/game.css" />
+    <script data-main="Bomber" src="require.js"></script>
   </head>
   <body>
     <center>
-    <div id="wrapper">
-      <div id="description">
-        <h1>BomberJS</h1>
-        <p>
-          A pure JavaScript game inspired by <cite>Super&nbsp;Bomberman</cite> on the
-          <abbr title="Super Nintendo Entertainment System">SNES</abbr>.
-        </p>
-        <p>
-          <strong>Technology</strong>
-          <ul>
-            <li><a href="http://javascript.crockford.com/">JavaScript</a></li>
-            <li><a href="http://jquery.com/">jQuery</a></li>
-            <li><a href="http://nodejs.org/">NodeJS</a></li>
-            <li><a href="http://requirejs.org/">RequireJS</a></li>
-            <li><a href="http://socket.io/">Socket.IO</a></li>
-          </ul>
-        </p>
-        <p>
-          <small>
-            Written by <a href="http://github.com/munro/">Ryan&nbsp;Munro</a>.
-            Emotional support by <a href="http://github.com/shadowarts/">Andrew&nbsp;Alm</a>.
-          </small>
-        </p>
-        <p>
-          <small>
-            <a href="http://github.com/munro/bomberjs/">View Source</a>.
-          </small>
-        </p>
+      <div id="wrapper">
+        <div id="description">
+          <h1>BomberJS</h1>
+          <div id="no-javascript" class="warning">
+            <h2>Please get a modern browser</h2>
+            <p>That supports FOOBAR.</p>
+          </div>
+          <!-- I want this disabled ASAP -->
+          <script>document.getElementById('no-javascript').style.display = 'none';</script>
+          <p>
+            A pure Java&shy;Script game in&shy;spired by <cite>Super&nbsp;Bomberman</cite> on the
+            <abbr title="Super Nintendo Entertainment System">SNES</abbr>.
+          </p>
+          <p>
+            <strong>Technology</strong>
+            <ul>
+              <li><a href="http://javascript.crockford.com/">JavaScript</a></li>
+              <li><a href="http://jquery.com/">jQuery</a></li>
+              <li><a href="http://nodejs.org/">NodeJS</a></li>
+              <li><a href="http://requirejs.org/">RequireJS</a></li>
+              <li><a href="http://socket.io/">Socket.IO</a></li>
+            </ul>
+          </p>
+          <p>
+            <small>
+              Written by <a href="http://github.com/munro/">Ryan&nbsp;Munro</a>.
+            </small>
+          </p>
+          <p>
+            <small>
+              <a href="http://github.com/munro/bomberjs/">View Source</a>.
+            </small>
+          </p>
+        </div>
+        <div id="game" style="display: ;">
+          <!--<div class="text">Hello World</div>-->
+          <div class="sprites"></div>
+          <div class="map"></div>
+        </div>
       </div>
-      <div id="game"></div>
-    </div>
     </center>
   </body>
 </html>

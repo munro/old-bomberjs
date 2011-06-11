@@ -1,17 +1,24 @@
-define(function (require) {
-    var TILE_WIDTH = 32,
-        TILE_HEIGHT = 32;
-    
+define(
+        ['require'],
+        function (require) {
 
     function Map(params) {
         this.params = params;
+    }
+    
+    Map.prototype.isWall = function (x, y) {
+        if (x < 0 || y < 0 || x >= this.params.width || y >= this.params.height) {
+            throw new RangeError();
+        } else {
+            return this.params.tiles[x + y * this.params.width] !== 1;
+        }
     }
     
     Map.prototype.createHTML = function () {
         var x, y, html;
         
         html = '<div class="bomber-map" style="width:' +
-            (TILE_WIDTH * this.params.width) + 'px">';
+            (Map.TILE_WIDTH * this.params.width) + 'px">';
         for (y = 0; y < this.params.height; y += 1) {
             for (x = 0; x < this.params.width; x += 1) {
                 html += '<div style="background-position:0 -' +
@@ -44,6 +51,9 @@ define(function (require) {
             tiles: tiles
         });
     };
+    
+    Map.TILE_WIDTH = 32;
+    Map.TILE_HEIGHT = 32;
     
     return Map;
 });

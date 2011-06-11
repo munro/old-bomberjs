@@ -1,1 +1,1 @@
-../libs/jquery-1.6.min.js
+libs/jquery-1.6.min.js

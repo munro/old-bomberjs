@@ -1,0 +1,17 @@
+{
+    'name': '',
+    'description': 'BomberJS server.',
+    'author': 'Ryan Munro',
+    'version': 'alpha',
+    'licenses': [{
+        'type': 'GNU',
+        'url': 'http'
+    }],
+    'engines': {
+        'node': '>=0.2.2'
+    },
+    'dependencies': {
+    },
+    'main': './bomber_server.js'
+}
+
