@@ -10,7 +10,7 @@ define(
         if (x < 0 || y < 0 || x >= this.params.width || y >= this.params.height) {
             throw new RangeError();
         } else {
-            return this.params.tiles[x + y * this.params.width] !== 1;
+            return this.params.tiles[x + y * this.params.width] === 1;
         }
     }
     
