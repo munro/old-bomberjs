@@ -7,7 +7,7 @@ define(
     var players = [];
         
     world = {
-        spriteCanMove: function (object, point) {
+        playerCanMove: function (object, point) {
         }
     };
     

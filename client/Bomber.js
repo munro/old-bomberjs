@@ -7,21 +7,27 @@ define(
     var players = [];
     var html = '';
     var i;
-    //try {
-        // randomize blocks
-        for (i = 0; i < 20; i += 1) {
-            blocks.push(new Sprite({
-                width: 32,
-                height: 32,
-                x: 32 * (1 + Math.floor(13 * Math.random())),
-                y: 32 * (1 + 2 * Math.floor(6 * Math.random())),
-                image: 'block.png'
-            }));
-        }
-        $('#game .map').html(map.createHTML());
+    
+    // randomize blocks
+    for (i = 0; i < 20; i += 1) {
+        blocks.push(new Sprite({
+            width: 32,
+            height: 32,
+            x: 32 * (1 + Math.floor(13 * Math.random())),
+            y: 32 * (1 + 2 * Math.floor(6 * Math.random())),
+            image: 'block.png'
+        }));
+    }
+    $('#game .map').html(map.createHTML());
 
-        for (i = 0; i < blocks.length; i += 1) {
-            html += blocks[i].createHTML();
+    for (i = 0; i < blocks.length; i += 1) {
+        html += blocks[i].createHTML();
+    }
+    $('#game .sprites').html(html);
+    
+    Bomber = {
+        hey: function () {
+            console.log('HEY' );
         }
             var player = new Sprite({
                 width: 32,
