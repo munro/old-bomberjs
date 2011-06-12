@@ -1,5 +1,5 @@
 define(
-        ['jquery', 'Map', 'Sprite', '../geometry/geometry'],
+        ['jquery', 'Map', 'Sprite', '../geometry.js/geometry'],
         function ($, Map, Sprite, geometry) {
     var Bomber;
     var map = Map.load();
