@@ -1,7 +1,8 @@
-define(
-        ['require'],
-        function (require) {
-
+// vim: ts=4 sw=4 sts=4 et:
+/*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
+  nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
+  unparam: true, newcap: true, maxerr: 50, indent: 4 */
+define(function (require) {
     function Map(params) {
         this.params = params;
     }
@@ -29,7 +30,7 @@ define(
         return html + '</div>';
     };
     
-    Map.load = function () {
+    Map.generateTestMap = function () {
         var x, y, width = 15, height = 13, tiles = [];
         for (y = 0; y < height; y += 1) {
             for (x = 0; x < width; x += 1) {
@@ -57,3 +58,4 @@ define(
     
     return Map;
 });
+

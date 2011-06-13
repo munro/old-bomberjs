@@ -1,1 +1,0 @@
-libs/jquery-1.6.min.js
