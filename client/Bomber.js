@@ -20,9 +20,12 @@ define(['jquery', 'World', 'events', './Player'], function ($, World, events, Pl
             var a = new Player();
             world.addSprite(a);
 
-            world.render();
-
             console.log('foobar', a);
+            setInterval(function() {
+                console.log('player', a);
+                a.move(world.EAST, 5);
+                world.render();
+            }, 500);
         }
     };
 

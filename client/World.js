@@ -7,7 +7,6 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
     function World() {
         var world,
             map = Map.generateTestMap(),
-            blocks = [],
             sprites = [];
 
         world = Object.create(events.EventEmitter.prototype);
@@ -16,7 +15,7 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
             var i, x, y;
             for (y = 0; y < map.params.height; y += 1) {
                 for (x = 0; x < map.params.width; x += 1) {
-                    if (map.isWall(x, y) && rec.intersects(new geometry.Rect([
+                    if (map.isWall(x, y) && rect.intersects(new geometry.Rect([
                             x * Map.TILE_WIDTH, y * Map.TILE_HEIGHT],
                             [Map.TILE_WIDTH, Map.TILE_HEIGHT]))) {
                         return true;
@@ -24,23 +23,38 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
                 }
             }
 
-            for (i = 0; i < blocks.length; i += 1) {
-                if (rec.intersects(new geometry.Rect([blocks[i].params.x,
-                        blocks[i].params.y], [blocks[i].params.width - 0.5,
-                        blocks[i].params.height - 0.5]))) {
-                    return true;
+            for (i = 0; i < sprites.length; i += 1) {
+                if (rect.intersects(new geometry.Rect([sprites[i].params.x,
+                        sprites[i].params.y], [sprites[i].params.width - 0.5,
+                        sprites[i].params.height - 0.5]))) {
+                    return sprites[i];
                 }
             }
-            return false;
+            return null;
         };
         
         world.addSprite = function (sprite) {
             sprites.push(sprite);
             sprite.world = world;
         };
+
+        world.removeSprite = function (sprite) {
+            var i = sprites.indexOf(sprite);
+            if(i >= 0)
+                sprites.splice(i, 1);
+        };
         
+        /* world directions */
+        world.NORTH = [0, -1];
+        world.SOUTH = [0, 1];
+        world.EAST = [1, 0];
+        world.WEST = [-1, 0];
+
         world.moveSprite = function (sprite, direction, distance) {
-        
+            sprite.params.x += distance * direction[0];
+            sprite.params.y += distance * direction[1];
+            sprite.rect = new geometry.Rect([sprite.params.y, sprite.params.y],
+                    [sprite.params.width, sprite.params.height]); 
         };
         
         world.render = function () {
