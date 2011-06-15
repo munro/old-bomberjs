@@ -16,9 +16,11 @@ define(['jquery', 'World', 'events', './Player'], function ($, World, events, Pl
                 $('#game .sprites').html(html);
             });
 
-            world.render();
 
             var a = new Player();
+            world.addSprite(a);
+
+            world.render();
 
             console.log('foobar', a);
         }

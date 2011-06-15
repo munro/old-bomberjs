@@ -2,25 +2,14 @@
 /*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
   nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
   unparam: true, newcap: true, maxerr: 50, indent: 4 */
-define(['geometry', './Map', './Sprite', 'events'], function (geometry,
-        Map, Sprite, events) {
+define(['geometry', './Map', './Sprite', './Block', 'events'], 
+        function (geometry, Map, Sprite, Block, events) {
     function World() {
         var world,
             map = Map.generateTestMap(),
             blocks = [],
             sprites = [];
 
-        // Temporarily generating random blocks for testing
-        for (i = 0; i < 20; i += 1) {
-            blocks.push(new Sprite({
-                width: 32,
-                height: 32,
-                x: 32 * (1 + Math.floor(13 * Math.random())),
-                y: 32 * (1 + 2 * Math.floor(6 * Math.random())),
-                image: 'block.png'
-            }));
-        }
-        
         world = Object.create(events.EventEmitter.prototype);
         
         world.rectIntersects = function (rect) {
@@ -61,11 +50,19 @@ define(['geometry', './Map', './Sprite', 'events'], function (geometry,
         
         world.renderSprites = function () {
             var i, html = '';
-            for (i = 0; i < blocks.length; i += 1) {
-                html += blocks[i].createHTML();
+            for (i = 0; i < sprites.length; i += 1) {
+                html += sprites[i].createHTML();
             }
             world.emit('render.sprites', html);
         };
+
+        // Temporarily generating random blocks for testing
+        for (i = 0; i < 20; i += 1) {
+            var block = new Block();
+            console.log(block); 
+            world.addSprite(block);
+        }
+        
         
         return world;
     }
