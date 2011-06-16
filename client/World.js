@@ -13,7 +13,24 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
         
         world.rectIntersects = function (rect) {
             var i, x, y;
-            for (y = 0; y < map.params.height; y += 1) {
+
+            /* wall? */
+            for(x = 0; x < rect.size[0]; ++x) {
+                for(y = 0; y < rect.size[1]; ++y) {
+                    if(map.isWall(Math.floor((rect.point[0] + x) / Map.TILE_WIDTH),
+                            Math.floor((rect.point[1] + y) / Map.TILE_HEIGHT))) {
+                        return true;
+                    }
+                }
+            }
+/*            x = rect.point[0] % map.TILE_WIDTH;
+            y = rect.point[1] % map.TILE_HEIGHT;
+
+
+            if(map.isWall(x,y))
+                return true;*/
+
+            /*for (y = 0; y < map.params.height; y += 1) {
                 for (x = 0; x < map.params.width; x += 1) {
                     if (map.isWall(x, y) && rect.intersects(new geometry.Rect([
                             x * Map.TILE_WIDTH, y * Map.TILE_HEIGHT],
@@ -21,7 +38,7 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
                         return true;
                     }
                 }
-            }
+            }*/
 
             for (i = 0; i < sprites.length; i += 1) {
                 if (rect.intersects(new geometry.Rect([sprites[i].params.x,
@@ -53,7 +70,7 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
         world.moveSprite = function (sprite, direction, distance) {
             sprite.params.x += distance * direction[0];
             sprite.params.y += distance * direction[1];
-            sprite.rect = new geometry.Rect([sprite.params.y, sprite.params.y],
+            sprite.rect = new geometry.Rect([sprite.params.x, sprite.params.y],
                     [sprite.params.width, sprite.params.height]); 
         };
         
@@ -73,7 +90,6 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
         // Temporarily generating random blocks for testing
         for (i = 0; i < 20; i += 1) {
             var block = new Block();
-            console.log(block); 
             world.addSprite(block);
         }
         

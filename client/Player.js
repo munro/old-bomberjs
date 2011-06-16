@@ -2,7 +2,9 @@
 /*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
   nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
   unparam: true, newcap: true, maxerr: 50, indent: 4 */
-define(['./Sprite', './Block'], function (Sprite, Block) {
+define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
+    var direction;
+
     function Player() {
         Sprite.call(this, {
             width: 32,
@@ -11,6 +13,8 @@ define(['./Sprite', './Block'], function (Sprite, Block) {
             y: 32 * (1 + 2 * Math.floor(6 * Math.random())),
             image: 'player.png'
         });
+
+        direction = [[-1,0],[1,0],[0,1],[0,1]][Math.random() * 4];
     }
     
     Player.prototype = Object.create(Sprite.prototype);
@@ -23,20 +27,28 @@ define(['./Sprite', './Block'], function (Sprite, Block) {
         var x = this.params.x,
             y = this.params.y,
             rect = this.rect,
-            intersects = false;
+            intersects = false,
+            intersects2 = false;
 
         /* move and check for collision */
+        intersects2 = this.world.rectIntersects(rect);
         Sprite.prototype.move.call(this, direction, distance);
         intersects = this.world.rectIntersects(this.rect);
-        console.log(intersects);
 
         if(true === intersects) { /* a wall, undo move */
+            console.log('wall-x', this.params.x, x);
+            console.log('wall-y', this.params.y, y);
+            console.log('wall-r', this.rect);
             this.params.x = x;
             this.params.y = y;
-            this.rect = rect;
+            this.rect = new geometry.Rect([x,y], [this.params.width, this.params.height]); 
+            console.log('wall', this.world.rectIntersects(this.rect));
+            return false;
         } else if(intersects instanceof Block) { /* destroy! */
-            interesects.destroy();
+            intersects.destroy();
         }
+
+        return true;
     }
 
     return Player;

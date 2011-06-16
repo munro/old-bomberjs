@@ -4,10 +4,15 @@
   unparam: true, newcap: false, maxerr: 50, indent: 4 */
 define(['jquery', 'World', 'events', './Player'], function ($, World, events, Player) {
     var bomber,
+        moves = [[0,-1],[1,0],[0,1],[-1,0]],
         world = World();
+
+    
 
     bomber = {
         init: function () {
+            var direction = moves[Math.floor(Math.random() * moves.length)];
+
             world.on('render.map', function (html) {
                 $('#game .map').html(html);
             });
@@ -22,8 +27,10 @@ define(['jquery', 'World', 'events', './Player'], function ($, World, events, Pl
 
             console.log('foobar', a);
             setInterval(function() {
-                console.log('player', a);
-                a.move(world.EAST, 5);
+                console.log('player', direction);
+                if(false === a.move(direction, 5)) {
+                    direction = moves[(moves.indexOf(direction) + 1) % moves.length];
+                }
                 world.render();
             }, 500);
         }
