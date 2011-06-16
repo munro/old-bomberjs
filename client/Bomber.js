@@ -27,12 +27,11 @@ define(['jquery', 'World', 'events', './Player'], function ($, World, events, Pl
 
             console.log('foobar', a);
             setInterval(function() {
-                console.log('player', direction);
-                if(false === a.move(direction, 5)) {
+                if(false === a.move(direction, 1)) {
                     direction = moves[(moves.indexOf(direction) + 1) % moves.length];
                 }
                 world.render();
-            }, 500);
+            }, 50);
         }
     };
 

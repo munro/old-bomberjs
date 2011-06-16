@@ -27,8 +27,7 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
         var x = this.params.x,
             y = this.params.y,
             rect = this.rect,
-            intersects = false,
-            intersects2 = false;
+            intersects = false;
 
         /* move and check for collision */
         intersects2 = this.world.rectIntersects(rect);
@@ -36,13 +35,9 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
         intersects = this.world.rectIntersects(this.rect);
 
         if(true === intersects) { /* a wall, undo move */
-            console.log('wall-x', this.params.x, x);
-            console.log('wall-y', this.params.y, y);
-            console.log('wall-r', this.rect);
             this.params.x = x;
             this.params.y = y;
             this.rect = new geometry.Rect([x,y], [this.params.width, this.params.height]); 
-            console.log('wall', this.world.rectIntersects(this.rect));
             return false;
         } else if(intersects instanceof Block) { /* destroy! */
             intersects.destroy();
