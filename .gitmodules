@@ -1,6 +1,6 @@
 [submodule "geometry.js"]
-	path = geometry.js
+	path = deps/geometry.js
 	url = https://github.com/munro/geometry.js.git
 [submodule "requirejs"]
-	path = requirejs
+	path = deps/requirejs
 	url = https://github.com/jrburke/requirejs.git
