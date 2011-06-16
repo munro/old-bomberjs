@@ -35,7 +35,7 @@ define(['./Map', 'events', 'geometry'], function (Map, events, geometry) {
     };
 
     /* destroy block */
-    Block.prototype.destroy = function(destroyer) {
+    Sprite.prototype.destroy = function(destroyer) {
         this.world.removeSprite(this);
         this.emit('destroyed', destroyer);
     }

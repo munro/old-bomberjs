@@ -1,1 +1,1 @@
-../scripts/require-0.24.0.js
+../deps/require-0.24.0.js

@@ -11,11 +11,11 @@ if (typeof Object.create !== 'function') {
 }
 require({
     paths: {
-        'events': '../events',
-        'geometry': '../geometry.js/geometry',
-        'jquery': '../jquery-1.6.min',
-        'json2': '../json2',
-        'underscore': 'underscore-1.1.6.min'
+        'events': '../../deps/events',
+        'geometry': '../../deps/geometry.js/geometry',
+        'jquery': '../../deps/jquery-1.6.min',
+        'json2': '../../deps/json2',
+        'underscore': '../../deps/underscore-1.1.6.min'
     }
 }, ['Bomber'], function (Bomber) {
     Bomber.init();
