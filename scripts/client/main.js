@@ -11,10 +11,10 @@ if (typeof Object.create !== 'function') {
 }
 require({
     paths: {
-        'events': 'libs/events',
+        'events': '../events',
         'geometry': '../geometry.js/geometry',
-        'jquery': 'libs/jquery-1.6.min',
-        'json2': 'libs/json2',
+        'jquery': '../jquery-1.6.min',
+        'json2': '../json2',
         'underscore': 'underscore-1.1.6.min'
     }
 }, ['Bomber'], function (Bomber) {
