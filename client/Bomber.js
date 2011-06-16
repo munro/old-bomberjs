@@ -2,16 +2,23 @@
 /*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
   nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
   unparam: true, newcap: false, maxerr: 50, indent: 4 */
-define(['jquery', 'World', 'events', './Player'], function ($, World, events, Player) {
+define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, World, events, Player, Keyboard) {
     var bomber,
         moves = [[0,-1],[1,0],[0,1],[-1,0]],
-        world = World();
+        world = World(),
+        controller = new Keyboard();
 
     
 
     bomber = {
         init: function () {
-            var direction = moves[Math.floor(Math.random() * moves.length)];
+            var direction = [0,0];
+
+            /* map keys */
+            controller.mapBinding(37, 'left');
+            controller.mapBinding(38, 'up');
+            controller.mapBinding(39, 'right');
+            controller.mapBinding(40, 'down');
 
             world.on('render.map', function (html) {
                 $('#game .map').html(html);
@@ -27,7 +34,10 @@ define(['jquery', 'World', 'events', './Player'], function ($, World, events, Pl
 
             console.log('foobar', a);
             setInterval(function() {
-                if(false === a.move(direction, 1)) {
+                var dx = controller['left'] * -1 + controller['right'],
+                    dy = controller['up'] * -1 + controller['down'];
+
+                if(false === a.move([dx,dy], 1)) {
                     direction = moves[(moves.indexOf(direction) + 1) % moves.length];
                 }
                 world.render();
