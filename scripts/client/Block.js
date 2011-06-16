@@ -11,10 +11,5 @@ define(['./Sprite'], function(Sprite) {
 
   Block.prototype = Object.create(Sprite.prototype);
 
-  /* destroy block */
-  Block.prototype.destroy = function() {
-    this.world.removeSprite(this);
-  }
-
   return Block;
 });

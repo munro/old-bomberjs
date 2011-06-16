@@ -1,6 +1,6 @@
 define(['jquery', 'events'], function($, events) {
   function Keyboard() {
-    this.bindings = [];
+    this.bindings = {};
     var _that = this;
 
     $(document).keydown(function(e) {
