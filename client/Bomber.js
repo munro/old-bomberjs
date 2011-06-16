@@ -37,9 +37,9 @@ define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, Wor
                 var dx = controller['left'] * -1 + controller['right'],
                     dy = controller['up'] * -1 + controller['down'];
 
-                if(false === a.move([dx,dy], 1)) {
-                    direction = moves[(moves.indexOf(direction) + 1) % moves.length];
-                }
+                a.move([dx,0], 4);
+                a.move([0,dy], 4);
+
                 world.render();
             }, 50);
         }
