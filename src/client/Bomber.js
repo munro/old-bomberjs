@@ -1,4 +1,4 @@
-define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, World, events, Player, Keyboard) {
+define(['jquery', 'World', 'events', './Player', './Keyboard', './PlayerInputController'], function ($, World, events, Player, Keyboard, PlayerInputController) {
     var bomber,
         moves = [[0,-1],[1,0],[0,1],[-1,0]],
         world = new World(),
@@ -22,20 +22,10 @@ define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, Wor
                 $('#game .sprites').html(html);
             });
 
-
             var a = new Player();
+            new PlayerInputController(a, controller);
             world.addSprite(a);
-
-            console.log('foobar', a);
-            /*setInterval(function() {
-                var dx = controller['left'] * -1 + controller['right'],
-                    dy = controller['up'] * -1 + controller['down'];
-
-                a.move([dx,0], 4);
-                a.move([0,dy], 4);
-
-                world.render();
-            }, 50);*/
+            world.render();
         }
     };
 

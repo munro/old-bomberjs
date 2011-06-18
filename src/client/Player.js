@@ -38,6 +38,8 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
         } else if (intersects instanceof Block) { /* destroy! */
             intersects.destroy();
         }
+        
+        this.world.render();
 
         return true;
     }

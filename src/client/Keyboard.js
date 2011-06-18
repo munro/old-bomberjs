@@ -6,6 +6,7 @@ define(['jquery', 'events'], function($, events) {
         $(document).keydown(function (e) {
             var eventName = that.bindings[e.keyCode];
             if (typeof eventName !== 'undefined') {
+                that.emit('all', eventName, 'down');
                 that[eventName] = true;
             }
         });
@@ -13,10 +14,10 @@ define(['jquery', 'events'], function($, events) {
         $(document).keyup(function (e) {
             var eventName = that.bindings[e.keyCode];
             if (typeof eventName !== 'undefined') {
+                that.emit('all', eventName, 'up');
                 that[eventName] = false;
             }
         });
-
     };
 
     Keyboard.prototype = Object.create(events.EventEmitter.prototype);
