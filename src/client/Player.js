@@ -24,26 +24,27 @@ define(['geometry', './Sprite', './Block', './Bomb'], function (geometry, Sprite
     }
 
     Player.prototype.move = function(direction, distance) {
-        var x = this.params.x,
+        var that = this,
+            x = this.params.x,
             y = this.params.y,
             rect = this.rect,
-            intersects = false;
+            filter = function(obj) {
+                return !(obj instanceof Player || obj instanceof Bomb);
+            };
 
         /* move and check for collision */
-        intersects2 = this.world.intersects(rect);
         Sprite.prototype.move.call(this, direction, distance);
-        intersects = this.world.intersects(this.rect);
-
-        if(intersects instanceof Player || intersects instanceof Bomb) {
-            this.world.render();
-            return true;
+        if(this.world.wallsWithin(this.rect).length > 0 ||
+                this.world.spritesWithin(this.rect, filter).length > 0) {
+            this.params.x = x;
+            this.params.y = y;
+            this.rect = new geometry.Rect([x, y], 
+                    [this.params.width, this.params.height]);     
+            return false;
         }
-        
-        this.params.x = x;
-        this.params.y = y;
-        this.rect = new geometry.Rect([x, y], [this.params.width, this.params.height]); 
-        
-        return false;
+
+        this.world.render();
+        return true;
     }
 
     return Player;

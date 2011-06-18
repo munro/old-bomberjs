@@ -5,28 +5,49 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
             sprites = [];
 
         this.intersects = function (shape) {
-            var i, x, y;
+            return this.wallsWithin(shape).length > 0 ||
+                this.spritesWithin(shape).length > 0;
+        };
 
-            // TODO: this algorithm only works for same size collisions
+        /* this belongs in Map but im too lazy to do that right now */
+        this.wallsWithin = function(shape) {
+            var x, y, 
+                wx, wy,
+                intersections = [];
+
+            // TODO: this algorithm only works for same size collisions...
+            // ...but its so sexy!
             for(x = 0; x < shape.size[0]; x += 1) {
                 for(y = 0; y < shape.size[1]; y += 1) {
-                    if(map.isWall(Math.floor((shape.point[0] + x) / Map.TILE_WIDTH),
-                            Math.floor((shape.point[1] + y) / Map.TILE_HEIGHT))) {
-                        return true;
+                    wx = Math.floor((shape.point[0] + x) / Map.TILE_WIDTH);
+                    wy = Math.floor((shape.point[1] + y) / Map.TILE_HEIGHT);
+
+                    if(map.isWall(wx, wy)) {
+                        intersections.push([wx,wy]);
                     }
                 }
             }
 
+            return intersections;
+        }
+
+        this.spritesWithin = function(shape, filter) {
+            var i, sprite,
+                intersections = [];
+
+            filter = filter || function() { return true; };
             for (i = 0; i < sprites.length; i += 1) {
-                if (shape.intersects(new geometry.Rect([sprites[i].params.x,
-                        sprites[i].params.y], [sprites[i].params.width - 0.5,
-                        sprites[i].params.height - 0.5]))) {
-                    return sprites[i];
+                sprite = sprites[i]
+                if(shape.intersects(new geometry.Rect([sprite.params.x,
+                            sprite.params.y], [sprite.params.width - 0.5,
+                            sprite.params.height - 0.5])) 
+                        && filter(sprite)) {
+                    intersections.push(sprite);
                 }
             }
 
-            return false;
-        };
+            return intersections;
+        }
         
         this.addSprite = function (sprite) {
             sprites.push(sprite);

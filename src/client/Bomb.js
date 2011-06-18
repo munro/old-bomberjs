@@ -1,4 +1,4 @@
-define(['./Sprite', './Block'], function(Sprite, Block) {
+define(['geometry', './Sprite', './Block'], function(geometry, Sprite, Block) {
     function Bomb(x, y) {
         Sprite.call(this, {
             width: 32,
@@ -15,6 +15,26 @@ define(['./Sprite', './Block'], function(Sprite, Block) {
     Bomb.prototype = Object.create(Sprite.prototype);
 
     Bomb.prototype.explode = function() {
+        console.log(this);
+        var i,
+            x = this.params.x,
+            y = this.params.y,
+            w = this.params.width,
+            h = this.params.height,
+            /* the proper indentation of this is left as an exercise for
+               the reader... */
+            intersections = 
+                this.world.intersectSprites(
+                    new geometry.Rect([x - w, y - h], [3 * w, 3 * h]),
+                    function(obj) {
+                        return !(obj instanceof Bomb);
+                    }); 
+
+        /* destroy sprites in witin range */
+        for(i = 0; i < intersections.length; ++i) {
+            intersections[i].destroy();
+        }
+
         console.log('I Zimbra!');
     };
 
