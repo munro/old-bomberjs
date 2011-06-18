@@ -5,13 +5,10 @@
 define(['geometry', './Map', './Sprite', './Block', 'events'], 
         function (geometry, Map, Sprite, Block, events) {
     function World() {
-        var world,
-            map = Map.generateTestMap(),
+        var map = Map.generateTestMap(),
             sprites = [];
 
-        world = Object.create(events.EventEmitter.prototype);
-        
-        world.intersects = function (shape) {
+        this.intersects = function (shape) {
             var i, x, y;
 
             // TODO: this algorithm only works for same size collisions
@@ -34,52 +31,52 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
             return false;
         };
         
-        world.addSprite = function (sprite) {
+        this.addSprite = function (sprite) {
             sprites.push(sprite);
-            sprite.world = world;
+            sprite.world = this;
         };
 
-        world.removeSprite = function (sprite) {
+        this.removeSprite = function (sprite) {
             var i = sprites.indexOf(sprite);
             if(i >= 0)
                 sprites.splice(i, 1);
         };
         
         /* world directions */
-        world.NORTH = [0, -1];
-        world.SOUTH = [0, 1];
-        world.EAST = [1, 0];
-        world.WEST = [-1, 0];
+        this.NORTH = [0, -1];
+        this.SOUTH = [0, 1];
+        this.EAST = [1, 0];
+        this.WEST = [-1, 0];
 
-        world.moveSprite = function (sprite, direction, distance) {
+        this.moveSprite = function (sprite, direction, distance) {
             sprite.params.x += distance * direction[0];
             sprite.params.y += distance * direction[1];
             sprite.rect = new geometry.Rect([sprite.params.x, sprite.params.y],
                     [sprite.params.width, sprite.params.height]); 
         };
         
-        world.render = function () {
-            world.emit('render.map', map.createHTML());
-            world.renderSprites();
+        this.render = function () {
+            this.emit('render.map', map.createHTML());
+            this.renderSprites();
         };
         
-        world.renderSprites = function () {
+        this.renderSprites = function () {
             var i, html = '';
             for (i = 0; i < sprites.length; i += 1) {
                 html += sprites[i].createHTML();
             }
-            world.emit('render.sprites', html);
+            this.emit('render.sprites', html);
         };
 
         // Temporarily generating random blocks for testing
         for (i = 0; i < 20; i += 1) {
             var block = new Block();
-            world.addSprite(block);
+            this.addSprite(block);
         }
-        
-        
-        return world;
     }
+    
+    World.prototype = Object.create(events.EventEmitter.prototype);
+    
     return World;
 });
 
