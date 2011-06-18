@@ -33,7 +33,7 @@ define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, Wor
             world.addSprite(a);
 
             console.log('foobar', a);
-            setInterval(function() {
+            /*setInterval(function() {
                 var dx = controller['left'] * -1 + controller['right'],
                     dy = controller['up'] * -1 + controller['down'];
 
@@ -41,7 +41,7 @@ define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, Wor
                 a.move([0,dy], 4);
 
                 world.render();
-            }, 50);
+            }, 50);*/
         }
     };
 

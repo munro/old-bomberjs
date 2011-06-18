@@ -84,3 +84,7 @@ a, a:active, a:visited {
 a:hover {
     text-decoration: underline;
 }
+button, input, select {
+    font-family: 'Terminal Dosis Light', Georgia, arial, serif;
+    font-size: 25px;
+}

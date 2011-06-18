@@ -30,9 +30,9 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
             intersects = false;
 
         /* move and check for collision */
-        intersects2 = this.world.rectIntersects(rect);
+        intersects2 = this.world.intersects(rect);
         Sprite.prototype.move.call(this, direction, distance);
-        intersects = this.world.rectIntersects(this.rect);
+        intersects = this.world.intersects(this.rect);
 
         if(true === intersects) { /* a wall, undo move */
             this.params.x = x;

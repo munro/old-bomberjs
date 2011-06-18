@@ -11,43 +11,27 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
 
         world = Object.create(events.EventEmitter.prototype);
         
-        world.rectIntersects = function (rect) {
+        world.intersects = function (shape) {
             var i, x, y;
 
-            /* wall? */
-            for(x = 0; x < rect.size[0]; ++x) {
-                for(y = 0; y < rect.size[1]; ++y) {
-                    if(map.isWall(Math.floor((rect.point[0] + x) / Map.TILE_WIDTH),
-                            Math.floor((rect.point[1] + y) / Map.TILE_HEIGHT))) {
+            // TODO: this algorithm only works for same size collisions
+            for(x = 0; x < shape.size[0]; ++x) {
+                for(y = 0; y < shape.size[1]; ++y) {
+                    if(map.isWall(Math.floor((shape.point[0] + x) / Map.TILE_WIDTH),
+                            Math.floor((shape.point[1] + y) / Map.TILE_HEIGHT))) {
                         return true;
                     }
                 }
             }
-/*            x = rect.point[0] % map.TILE_WIDTH;
-            y = rect.point[1] % map.TILE_HEIGHT;
-
-
-            if(map.isWall(x,y))
-                return true;*/
-
-            /*for (y = 0; y < map.params.height; y += 1) {
-                for (x = 0; x < map.params.width; x += 1) {
-                    if (map.isWall(x, y) && rect.intersects(new geometry.Rect([
-                            x * Map.TILE_WIDTH, y * Map.TILE_HEIGHT],
-                            [Map.TILE_WIDTH, Map.TILE_HEIGHT]))) {
-                        return true;
-                    }
-                }
-            }*/
 
             for (i = 0; i < sprites.length; i += 1) {
-                if (rect.intersects(new geometry.Rect([sprites[i].params.x,
+                if (shape.intersects(new geometry.Rect([sprites[i].params.x,
                         sprites[i].params.y], [sprites[i].params.width - 0.5,
                         sprites[i].params.height - 0.5]))) {
                     return sprites[i];
                 }
             }
-            return null;
+            return false;
         };
         
         world.addSprite = function (sprite) {
