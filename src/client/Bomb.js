@@ -1,25 +1,24 @@
-define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
-    function Bomb(params) {
-        var that = this;
-        this.params = params;
-        this.timer = setTimeout(function () {
-            that.destroy();
-        }, params.delay);
-    }
+define(['./Sprite', './Block'], function(Sprite, Block) {
+    function Bomb(x, y) {
+        Sprite.call(this, {
+            width: 32,
+            height: 32,
+            x: x,
+            y: y,
+            image: 'bomb.png'
+        });
     
+        /* bomb blows up after 3 seconds */
+        setTimeout(Bomb.prototype.explode, 3000);
+    }
+
     Bomb.prototype = Object.create(Sprite.prototype);
 
-    Bomb.prototype.destroy = function () {
-        Sprite.prototype.destroy.call(this);
-        
-        // Destroy stuff around bomb with destroyer set as this.params.player,
-        // and display the fire effect.  Use this.params.size for the bomb spread
+    Bomb.prototype.explode = function() {
+        console.log('I Zimbra!');
     };
 
     return Bomb;
 });
 
-/*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
-  nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
-  unparam: true, newcap: false, maxerr: 50, indent: 4 */
 // vim: ts=4 sw=4 sts=4 et:

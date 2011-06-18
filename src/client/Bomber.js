@@ -13,6 +13,7 @@ define(['jquery', 'World', 'events', './Player', './Keyboard', './PlayerInputCon
             controller.mapBinding(38, 'up');
             controller.mapBinding(39, 'right');
             controller.mapBinding(40, 'down');
+            controller.mapBinding(13, 'bomb');
 
             world.on('render.map', function (html) {
                 $('#game .map').html(html);

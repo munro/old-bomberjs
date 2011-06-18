@@ -1,4 +1,4 @@
-define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
+define(['geometry', './Sprite', './Block', './Bomb'], function (geometry, Sprite, Block, Bomb) {
     var direction;
 
     function Player() {
@@ -19,6 +19,10 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
         console.log('hell yeah');
     };
 
+    Player.prototype.placeBomb = function() {
+        this.world.addSprite(new Bomb(this.params.x, this.params.y));
+    }
+
     Player.prototype.move = function(direction, distance) {
         var x = this.params.x,
             y = this.params.y,
@@ -30,18 +34,16 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
         Sprite.prototype.move.call(this, direction, distance);
         intersects = this.world.intersects(this.rect);
 
-        if (true === intersects) { /* a wall, undo move */
-            this.params.x = x;
-            this.params.y = y;
-            this.rect = new geometry.Rect([x, y], [this.params.width, this.params.height]); 
-            return false;
-        } else if (intersects instanceof Block) { /* destroy! */
-            intersects.destroy();
+        if(intersects instanceof Player || intersects instanceof Bomb) {
+            this.world.render();
+            return true;
         }
         
-        this.world.render();
-
-        return true;
+        this.params.x = x;
+        this.params.y = y;
+        this.rect = new geometry.Rect([x, y], [this.params.width, this.params.height]); 
+        
+        return false;
     }
 
     return Player;

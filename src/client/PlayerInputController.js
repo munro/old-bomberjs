@@ -7,6 +7,11 @@ define(['jquery', 'events'], function($, events) {
                 startTimer();
             }
         });
+
+        keyboard.on('bomb', function() {
+            console.log('bomb');
+            player.placeBomb();
+        });
         
         function startTimer() {
             if (timer) {

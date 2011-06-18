@@ -18,6 +18,13 @@ define(['jquery', 'events'], function($, events) {
                 that[eventName] = false;
             }
         });
+
+        $(document).keypress(function (e) {
+            var eventName = that.bindings[e.keyCode];
+            if(typeof eventName !== 'undefined') {
+                that.emit(eventName);
+            }
+        });
     };
 
     Keyboard.prototype = Object.create(events.EventEmitter.prototype);
