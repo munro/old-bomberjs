@@ -1,7 +1,3 @@
-// vim: ts=4 sw=4 sts=4 et:
-/*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
-  nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
-  unparam: true, newcap: false, maxerr: 50, indent: 4 */
 define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, World, events, Player, Keyboard) {
     var bomber,
         moves = [[0,-1],[1,0],[0,1],[-1,0]],
@@ -46,3 +42,7 @@ define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, Wor
     return bomber;
 });
 
+/*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
+  nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
+  unparam: true, newcap: false, maxerr: 50, indent: 4 */
+// vim: ts=4 sw=4 sts=4 et:

@@ -1,7 +1,3 @@
-// vim: ts=4 sw=4 sts=4 et:
-/*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
-  nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
-  unparam: true, newcap: true, maxerr: 50, indent: 4 */
 define(['./Map', 'events', 'geometry'], function (Map, events, geometry) {
     function Sprite(params) {
         this.params = params;
@@ -43,3 +39,7 @@ define(['./Map', 'events', 'geometry'], function (Map, events, geometry) {
     return Sprite;
 });
 
+/*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
+  nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
+  unparam: true, newcap: false, maxerr: 50, indent: 4 */
+// vim: ts=4 sw=4 sts=4 et:
