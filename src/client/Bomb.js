@@ -1,5 +1,7 @@
 define(['geometry', './Sprite', './Block'], function(geometry, Sprite, Block) {
     function Bomb(x, y) {
+        var that = this;
+
         Sprite.call(this, {
             width: 32,
             height: 32,
@@ -9,7 +11,9 @@ define(['geometry', './Sprite', './Block'], function(geometry, Sprite, Block) {
         });
     
         /* bomb blows up after 3 seconds */
-        setTimeout(Bomb.prototype.explode, 3000);
+        setTimeout(function() {
+            Bomb.prototype.explode.call(that);
+        }, 3000);
     }
 
     Bomb.prototype = Object.create(Sprite.prototype);
@@ -24,7 +28,7 @@ define(['geometry', './Sprite', './Block'], function(geometry, Sprite, Block) {
             /* the proper indentation of this is left as an exercise for
                the reader... */
             intersections = 
-                this.world.intersectSprites(
+                this.world.spritesWithin(
                     new geometry.Rect([x - w, y - h], [3 * w, 3 * h]),
                     function(obj) {
                         return !(obj instanceof Bomb);
@@ -35,6 +39,8 @@ define(['geometry', './Sprite', './Block'], function(geometry, Sprite, Block) {
             intersections[i].destroy();
         }
 
+        this.destroy();
+        this.world.render();
         console.log('I Zimbra!');
     };
 
