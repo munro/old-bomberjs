@@ -9,7 +9,6 @@ define(['jquery', 'events'], function($, events) {
         });
 
         keyboard.on('bomb', function() {
-            console.log('bomb');
             player.placeBomb();
         });
         
