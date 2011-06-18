@@ -12,8 +12,8 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
             var i, x, y;
 
             // TODO: this algorithm only works for same size collisions
-            for(x = 0; x < shape.size[0]; ++x) {
-                for(y = 0; y < shape.size[1]; ++y) {
+            for(x = 0; x < shape.size[0]; x += 1) {
+                for(y = 0; y < shape.size[1]; y += 1) {
                     if(map.isWall(Math.floor((shape.point[0] + x) / Map.TILE_WIDTH),
                             Math.floor((shape.point[1] + y) / Map.TILE_HEIGHT))) {
                         return true;
@@ -28,6 +28,7 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
                     return sprites[i];
                 }
             }
+
             return false;
         };
         

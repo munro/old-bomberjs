@@ -5,14 +5,12 @@
 define(['jquery', 'World', 'events', './Player', './Keyboard'], function ($, World, events, Player, Keyboard) {
     var bomber,
         moves = [[0,-1],[1,0],[0,1],[-1,0]],
-        world = World(),
+        world = new World(),
         controller = new Keyboard();
-
-    
 
     bomber = {
         init: function () {
-            var direction = [0,0];
+            var direction = [0, 0];
 
             /* map keys */
             controller.mapBinding(37, 'left');

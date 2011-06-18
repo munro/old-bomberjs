@@ -14,7 +14,7 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
             image: 'player.png'
         });
 
-        direction = [[-1,0],[1,0],[0,1],[0,1]][Math.random() * 4];
+        direction = [[-1, 0], [1, 0], [0, 1], [0, 1]][Math.random() * 4];
     }
     
     Player.prototype = Object.create(Sprite.prototype);
@@ -34,12 +34,12 @@ define(['geometry', './Sprite', './Block'], function (geometry, Sprite, Block) {
         Sprite.prototype.move.call(this, direction, distance);
         intersects = this.world.intersects(this.rect);
 
-        if(true === intersects) { /* a wall, undo move */
+        if (true === intersects) { /* a wall, undo move */
             this.params.x = x;
             this.params.y = y;
-            this.rect = new geometry.Rect([x,y], [this.params.width, this.params.height]); 
+            this.rect = new geometry.Rect([x, y], [this.params.width, this.params.height]); 
             return false;
-        } else if(intersects instanceof Block) { /* destroy! */
+        } else if (intersects instanceof Block) { /* destroy! */
             intersects.destroy();
         }
 
