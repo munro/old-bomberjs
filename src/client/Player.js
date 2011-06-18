@@ -21,6 +21,7 @@ define(['geometry', './Sprite', './Block', './Bomb'], function (geometry, Sprite
 
     Player.prototype.placeBomb = function() {
         this.world.addSprite(new Bomb(this.params.x, this.params.y));
+        this.world.render();
     }
 
     Player.prototype.move = function(direction, distance) {
