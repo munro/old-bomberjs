@@ -1,11 +1,11 @@
 {
-    'name': '',
+    'name': 'bomberjs_server',
     'description': 'BomberJS server.',
     'author': 'Ryan Munro',
     'version': 'alpha',
     'licenses': [{
-        'type': 'GNU',
-        'url': 'http'
+        'type': 'GPLv3',
+        'url': 'http://www.gnu.org/licenses/gpl-3.0-standalone.html'
     }],
     'engines': {
         'node': '>=0.2.2'

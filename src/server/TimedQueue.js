@@ -1,7 +1,4 @@
-//////////////
-// Timed Queue
-//////////////
-export = function(callback) {
+function TimedQueue(callback) {
 	var timer = null,
 		start, last_delay, events;
 
@@ -37,5 +34,11 @@ export = function(callback) {
 	};
 };
 
-export.DELAY = 12; 
+TimedQueue.DELAY = 12;
 
+export = TimedQueue;
+
+/*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
+  nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
+  unparam: true, newcap: false, maxerr: 50, indent: 4 */
+// vim: ts=4 sw=4 sts=4 et:
