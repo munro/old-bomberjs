@@ -29,7 +29,7 @@ define(['geometry', './Sprite', './Block'], function(geometry, Sprite, Block) {
                the reader... */
             intersections = 
                 this.world.spritesWithin(
-                    new geometry.Rect([x - w, y - h], [3 * w, 3 * h]),
+                    new geometry.Box([x - w, y - h], [3 * w, 3 * h]),
                     function(obj) {
                         return !(obj instanceof Bomb);
                     }); 

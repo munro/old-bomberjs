@@ -9,7 +9,7 @@ define(['./Map', 'events', 'geometry'], function (Map, events, geometry) {
             this.params.height = Map.TILE_HEIGHT;
         }
 
-        this.rect = new geometry.Rect([this.params.x, this.params.y], [
+        this.rect = new geometry.Box([this.params.x, this.params.y], [
                 this.params.width, this.params.height]);
     }
 

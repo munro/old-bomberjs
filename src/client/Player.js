@@ -40,7 +40,7 @@ define(['geometry', './Sprite', './Block',
                 this.world.spritesWithin(this.rect, filter).length > 0) {
             this.params.x = x;
             this.params.y = y;
-            this.rect = new geometry.Rect([x, y], 
+            this.rect = new geometry.Box([x, y], 
                     [this.params.width, this.params.height]);     
             return false;
         }

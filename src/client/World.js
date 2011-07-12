@@ -38,7 +38,7 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
             filter = filter || function() { return true; };
             for (i = 0; i < sprites.length; i += 1) {
                 sprite = sprites[i]
-                if(shape.intersects(new geometry.Rect([sprite.params.x,
+                if(shape.intersects(new geometry.Box([sprite.params.x,
                             sprite.params.y], [sprite.params.width - 0.5,
                             sprite.params.height - 0.5])) 
                         && filter(sprite)) {
@@ -69,7 +69,7 @@ define(['geometry', './Map', './Sprite', './Block', 'events'],
         this.moveSprite = function (sprite, direction, distance) {
             sprite.params.x += distance * direction[0];
             sprite.params.y += distance * direction[1];
-            sprite.rect = new geometry.Rect([sprite.params.x, sprite.params.y],
+            sprite.rect = new geometry.Box([sprite.params.x, sprite.params.y],
                     [sprite.params.width, sprite.params.height]); 
         };
         

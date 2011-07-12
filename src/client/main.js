@@ -12,7 +12,8 @@ require({
         'jquery': '../../deps/jquery-1.6.min',
         'json2': '../../deps/json2',
         'underscore': '../../deps/underscore-1.1.6.min'
-    }
+    },
+    urlArgs: 'bust=' + (new Date()).getTime()
 }, ['Bomber'], function (Bomber) {
     Bomber.init();
 });
