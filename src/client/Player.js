@@ -1,4 +1,5 @@
-define(['geometry', './Sprite', './Block', './Bomb'], function (geometry, Sprite, Block, Bomb) {
+define(['geometry', './Sprite', './Block',
+        './Bomb'], function (geometry, Sprite, Block, Bomb) {
     var direction;
 
     function Player() {
