@@ -1,34 +1,20 @@
-var Client = require('Client'),
-    TimedQueue = require('TimedQueue');
-
 function Connection(socket) {
-    var queue = new TimedQueue();
-    
-
-    socket.addListener('data', function(data) {
-        self.emit('message', JSON.parse(data));
-    });
-    
-    var obj = {
-        send: function(message) {
-            if(debounce === null) {
-                queue = [Connection.DELAY, message];
-            }
-            else {
-                queue.push(message);
-            }
-            socket.write(JSON.stringify(message));
+    conn.on('login', function (message) {
+        if (User.authenticate(message.user, message.password)) {
+            conn.send('login', {success: true});
+            User.login(message.user);
+        } else {
+            conn.send('login', {success: false});
         }
-    };
-    
-    obj.prototype = new process.EventEmitter();
-    
-    return obj;
+    });
+    console.log(socket);
 }
 
-Connection.DELAY = 15;
+//Connection.prototype = Object.create(require('events').EventEmitter);
 
-export = Connection;
+//Connection.DELAY = 15;
+
+module.exports = Connection;
 
 /*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
   nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,

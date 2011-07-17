@@ -11,6 +11,7 @@
         'node': '>=0.2.2'
     },
     'dependencies': {
+        'socket.io': '0.7.6'
     },
     'main': './bomber_server.js'
 }

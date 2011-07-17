@@ -1,81 +1,22 @@
-require.paths.unshift('.')
-
 var sys = require('sys'),
-	ws = require('ws')
+    Connection = require('./Connection');
 
-var clients = [];
+var io = require('socket.io').listen(2892);
 
+var connection = [];
 
+io.sockets.on('connection', function (socket) {
+    connections.push(new Connection(socket));
 
-//////////
-// Client
-//////////
-function Client(_socket) {
-	var self = this;
-	var debounce = null;
-	var queue = [];
-	
-	socket.addListener('data', function(data) {
-		self.emit('message', JSON.parse(data));
-	});
-	
-	var obj = {
-		send: function(message) {
-			if(debounce === null) {
-				queue = [Client.DELAY, message];
-			}
-			else {
-				queue.push(message);
-			}
-			socket.write(JSON.stringify(message));
-		}
-	};
-	
-	obj.prototype = new process.EventEmitter();
-	
-	return obj;
-}
+    socket.emit('version', 'v0.0.0');
 
-Client.DELAY = 15;
-
-///////////////////
-// Websocket Server
-///////////////////
-var server = ws.createServer(function(socket) {
-	var _client = null;
-	
-	socket.addListener('connect', function(resource) {
-		sys.puts('client connected from ' + resource);
-		_client = Client(socket);
-		clients.push(_client);
-	});
-
-	socket.addListener('close', function() {
-		sys.puts('client left');
-	});
+    socket.on('login', function (name, password, fn) {
+        if (name !== 'ryan' || (name === 'ryan' && password === 'doggies') {
+            fn(false);
+        }
+        fn({message: 'You suck.'});
+    });
 });
-
-server.listen(1337);
-
-////////////////
-// Simple Server
-////////////////
-var simple = ws.createServer(function(socket) {
-	socket.addListener("connect", function(resource) {
-		sys.puts("client connected from " + resource)
-		socket.write("welcome\r\n")
-	});
-
-	socket.addListener("data", function(data) {
-		socket.write(data)
-	});
-
-	socket.addListener("close", function() {
-		sys.puts("client left")
-	});
-});
-
-simple.listen(1338);
 
 /*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
   nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,

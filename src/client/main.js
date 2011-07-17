@@ -11,6 +11,7 @@ require({
         'geometry': '../../deps/geometry.js/geometry',
         'jquery': '../../deps/jquery-1.6.min',
         'json2': '../../deps/json2',
+        'socket.io': '../../deps/socket.io/dist/socket.io.js',
         'underscore': '../../deps/underscore-1.1.6.min'
     },
     urlArgs: 'bust=' + (new Date()).getTime()

@@ -4,3 +4,6 @@
 [submodule "requirejs"]
 	path = deps/requirejs
 	url = https://github.com/jrburke/requirejs.git
+[submodule "deps/socket.io"]
+	path = deps/socket.io
+	url = https://github.com/LearnBoost/socket.io-client.git
