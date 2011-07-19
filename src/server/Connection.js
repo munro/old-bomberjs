@@ -1,18 +1,27 @@
+var User = require('./User');
+
 function Connection(socket) {
-    conn.on('login', function (message) {
-        if (User.authenticate(message.user, message.password)) {
-            conn.send('login', {success: true});
-            User.login(message.user);
+    var that = this;
+
+    this.socket = socket;
+
+    socket.on('login', function (user, password, fn) {
+        if (User.authenticate(user, password)) {
+            fn(false);
+            User.login(that, user);
         } else {
-            conn.send('login', {success: false});
+            fn('You suck');
         }
     });
-    console.log(socket);
 }
 
-//Connection.prototype = Object.create(require('events').EventEmitter);
+Connection.connections = [];
 
-//Connection.DELAY = 15;
+Connection.accept = function (socket) {
+    Connection.connections.push(new Connection(socket));
+};
+
+Connection.prototype = Object.create(require('events').EventEmitter);
 
 module.exports = Connection;
 

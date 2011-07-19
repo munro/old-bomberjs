@@ -2,7 +2,10 @@ define(function (require) {
     function Map(params) {
         this.params = params;
     }
-    
+
+    Map.TILE_WIDTH = 32;
+    Map.TILE_HEIGHT = 32;
+
     Map.prototype.isWall = function (x, y) {
         if (x < 0 || y < 0 || x >= this.params.width || y >= this.params.height) {
             throw new RangeError();
@@ -10,10 +13,10 @@ define(function (require) {
             return this.params.tiles[x + y * this.params.width] === 1;
         }
     }
-    
+
     Map.prototype.createHTML = function () {
         var x, y, html;
-        
+
         html = '<div class="bomber-map" style="width:' +
             (Map.TILE_WIDTH * this.params.width) + 'px">';
         for (y = 0; y < this.params.height; y += 1) {
@@ -25,7 +28,7 @@ define(function (require) {
         }
         return html + '</div>';
     };
-    
+
     Map.generateTestMap = function () {
         var x, y, width = 15, height = 13, tiles = [];
         for (y = 0; y < height; y += 1) {
@@ -48,10 +51,7 @@ define(function (require) {
             tiles: tiles
         });
     };
-    
-    Map.TILE_WIDTH = 32;
-    Map.TILE_HEIGHT = 32;
-    
+
     return Map;
 });
 

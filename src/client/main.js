@@ -5,17 +5,25 @@ if (typeof Object.create !== 'function') {
         return new F();
     };
 }
+
 require({
     paths: {
         'events': '../../deps/events',
         'geometry': '../../deps/geometry.js/geometry',
         'jquery': '../../deps/jquery-1.6.min',
         'json2': '../../deps/json2',
-        'socket.io': '../../deps/socket.io/dist/socket.io.js',
+        'socket.io': '../../deps/socket.io/dist/socket.io',
         'underscore': '../../deps/underscore-1.1.6.min'
     },
     urlArgs: 'bust=' + (new Date()).getTime()
 }, ['Bomber'], function (Bomber) {
+    var socket = io.connect('http://localhost:1988');
+    socket.on('version', function () {
+        socket.emit('login', 'ryan', 'doggies', function (err) {
+            console.log(err);
+        });
+        console.log(arguments);
+    });
     Bomber.init();
 });
 

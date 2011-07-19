@@ -1,21 +1,17 @@
 var sys = require('sys'),
     Connection = require('./Connection');
 
-var io = require('socket.io').listen(2892);
-
-var connection = [];
+var io = require('socket.io').listen(1988);
 
 io.sockets.on('connection', function (socket) {
-    connections.push(new Connection(socket));
-
     socket.emit('version', 'v0.0.0');
-
-    socket.on('login', function (name, password, fn) {
-        if (name !== 'ryan' || (name === 'ryan' && password === 'doggies') {
+    Connection.accept(socket)
+    /*socket.on('login', function (name, password, fn) {
+        if (name !== 'ryan' || (name === 'ryan' && password === 'doggies')) {
             fn(false);
         }
         fn({message: 'You suck.'});
-    });
+    });*/
 });
 
 /*jslint white: true, devel: false, onevar: true, browser: true, undef: false,

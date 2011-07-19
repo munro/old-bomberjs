@@ -1,14 +1,23 @@
-function User() {
+function User(params) {
 }
-User.prototype = require('core.User').prototype;
-User.login = function (name, password) {
+
+User.users = [];
+
+User.authenticate = function (name, password) {
+    return true;
 };
 
-// alternate option
-var User = require('base.User');
-User.mixin('foobar', function () {});
+User.login = function (connection, name) {
+    User.users.push(new User({
+        socket: connection.socket,
+        connection: connection,
+        name: name
+    }));
+};
 
-export = User;
+//User.prototype = require('core.User').prototype;
+
+module.exports = User;
 
 /*jslint white: true, devel: false, onevar: true, browser: true, undef: false,
   nomen: false, regexp: true, plusplus: true, continue: true, bitwise: true,
