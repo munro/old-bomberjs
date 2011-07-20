@@ -6,8 +6,8 @@ How to run the client
 
 -   Dowload the submodules.
 
-    git submodule init
-    git submodule update
+        git submodule init
+        git submodule update
 
 -   Then open ./client/index.html in your web browser!
     A web server is not required.
