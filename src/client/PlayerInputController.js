@@ -1,6 +1,8 @@
 define(['jquery', 'events'], function($, events) {
     function PlayerInputController(player, keyboard) {
         var timer = false;
+        var animation = 1;
+        var flip = 0;
         
         keyboard.on('all', function (key, pos) {
             if (pos === 'down') {
@@ -24,8 +26,28 @@ define(['jquery', 'events'], function($, events) {
                     clearInterval(timer);
                     timer = false;
                 } else {
+                    if( dx === 0 ) {
+                        if( dy < 0 )
+                            player.setImage('up' + animation + '.png');
+                        else
+                            player.setImage('down' + animation + '.png');
+                    }
+                    if( dy === 0 ) {
+                        if( dx < 0 )
+                            player.setImage('left' + animation + '.png');
+                        else
+                            player.setImage('right' + animation + '.png');
+                    }
                     player.move([dx, 0], 4);
                     player.move([0, dy], 4);
+                    if( animation === 3 ) 
+                        flip = 1;
+                    if( animation === 1 )
+                        flip = 0;
+                    if( flip === 0 )
+                        animation++; 
+                    else 
+                        animation--;
                 }
             }, 50);
         }

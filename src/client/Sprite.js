@@ -19,6 +19,11 @@ define(['./Map', 'events', 'geometry'], function (Map, events, geometry) {
         return this.rect.intersects(shape);
     };
 
+    Sprite.prototype.setImage = function (img) {
+        this.params.image = img;
+        //this.world.render();
+    };
+
     Sprite.prototype.move = function (direction, distance) {
         this.world.moveSprite(this, direction, distance);
     };

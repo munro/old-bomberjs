@@ -8,7 +8,7 @@ define(['geometry', './Sprite', './Block',
             height: 32,
             x: 32 * (1 + Math.floor(13 * Math.random())),
             y: 32 * (1 + 2 * Math.floor(6 * Math.random())),
-            image: 'player.png'
+            image: 'right1.png'
         });
 
         direction = [[-1, 0], [1, 0], [0, 1], [0, 1]][Math.random() * 4];
